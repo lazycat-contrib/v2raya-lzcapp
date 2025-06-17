@@ -1,0 +1,48 @@
+lzc-sdk-version: 0.1
+package: cloud.lazycat.app.v2raya
+version: 2.2.67
+name: V2raya
+description: >-
+  A web GUI client of Project V which supports VMess, VLESS, SS, SSR, Trojan,
+  Tuic and Juicity protocols. 🚀
+license: https://choosealicense.com/licenses/mit/
+homepage: https://github.com/v2rayA/v2rayA
+author: mzz2017
+application:
+  subdomain: v2raya
+  background_task: true
+  user_app: false
+  public_path:
+    - / 
+  routes:
+    - /=http://host.lzcapp:2017
+  ingress:
+    - protocol: tcp
+      port: 20170
+      service: v2raya
+    - protocol: tcp
+      port: 20171
+      service: v2raya
+    - protocol: tcp
+      port: 20172
+      service: v2raya
+      
+  depends_on:
+    - v2raya
+    
+  health_check:
+    test_url: http://host.lzcapp:2017
+    start_period: 10s
+    
+services:
+  v2raya:
+    image: dockerproxy.net/mzz2017/v2raya:v2.2.6.7
+    environment:
+      - V2RAYA_ADDRESS=host.lzcapp:2017
+      - V2RAYA_NFTABLES_SUPPORT=off
+      - V2RAYA_LOG_FILE=/var/v2raya.log
+    network_mode: host
+    netadmin: true
+    binds:
+      - /lzcapp/cache:/var
+      - /lzcapp/var:/etc/v2raya
