@@ -1,0 +1,43 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/v2raya.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: v2raya
+
+build:
+  run_buildscript: false
+
+images:
+  # 主应用：上游 Docker Hub mzz2017/v2raya。
+  # 注意：docker.1ms.run / hub.rat.dev 对该镜像返回“违反地区法律”拒绝服务，
+  # 因此 workflow 用 docker-mirror: docker.1panel.live 覆盖默认加速器（已匿名验证可拉取、含 amd64）。
+  # tag 家族为 v2.x 三段 SemVer（v2.2.x.y 四段式被排除），当前最新 v2.4.19。
+  - id: v2raya
+    target: service
+    service: v2raya
+    source: mzz2017/v2raya
+    channel: stable
+    sort: semver
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+
+stores:
+  official:
+    # Official store publication is intentionally disabled; publish only to Miaomiao Store.
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: V2raya
+    summary: "支持 VMess/VLESS/SS/SSR/Trojan/Tuic/Juicity 的 Project V Web GUI"

@@ -1,0 +1,15 @@
+package: cloud.lazycat.app.v2raya
+version: 2.2.67
+name: V2raya
+description: "A web GUI client of Project V which supports VMess, VLESS, SS, SSR, Trojan, Tuic and Juicity protocols."
+min_os_version: "1.5.0"
+license: https://choosealicense.com/licenses/mit/
+homepage: https://github.com/v2rayA/v2rayA
+author: mzz2017
+locales:
+  zh:
+    description: "Project V 的 Web GUI 客户端，支持 VMess、VLESS、SS、SSR、Trojan、Tuic 和 Juicity 协议。"
+    name: V2raya
+  en:
+    description: "A web GUI client of Project V which supports VMess, VLESS, SS, SSR, Trojan, Tuic and Juicity protocols."
+    name: V2raya
