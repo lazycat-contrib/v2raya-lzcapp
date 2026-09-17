@@ -21,8 +21,8 @@ application:
     start_period: 10s
 services:
   v2raya:
-    # upstream: mzz2017/v2raya:v2.4.19
-    image: docker.1panel.live/mzz2017/v2raya:v2.4.19
+    # upstream: mzz2017/v2raya:v2.4.20
+    image: docker.1panel.live/mzz2017/v2raya:v2.4.20
     environment:
       - V2RAYA_ADDRESS=host.lzcapp:2017
       - V2RAYA_NFTABLES_SUPPORT=off
